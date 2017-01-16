@@ -1,0 +1,30 @@
+systemLog:
+   destination: file
+   path: /var/vcap/sys/log/mongod/mongod.log
+   quiet: false
+   logAppend: true
+
+# TODO:
+# journal.enable: false - only for an arbiter node, on data bearing nodes SHOULD ALWAYS BE TRUE
+# log rotation
+
+storage:
+  dbPath: /var/vcap/store/mongod
+  directoryPerDB: true
+  smallFiles: true
+  quota:
+    enforced: true
+    maxFilesPerDB: 16
+  journal:
+    enabled: false
+
+security:
+  authorization: enabled
+  keyFile: /var/vcap/jobs/mongod/config/mongod_replica_key
+
+net:
+  bindIp: <%= p("mongod.bindip") %>
+  port: <%= p("mongod.port") %>
+
+replication:
+  replSetName: <%= p("mongod.replset_name") %>
