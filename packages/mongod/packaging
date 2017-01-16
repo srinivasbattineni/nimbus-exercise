@@ -1,0 +1,6 @@
+# abort script on any command that exits with a non zero value
+set -e
+cd mongod
+tar xfz mongo-r3.0.6.tar.gz
+cd mongo-r3.0.6
+/var/vcap/packages/scons/bin/scons mongod --disable-warnings-as-errors

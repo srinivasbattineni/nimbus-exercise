@@ -1,0 +1,8 @@
+---
+name: mongod
+
+dependencies:
+ - scons
+
+files:
+ - mongod/**/*
