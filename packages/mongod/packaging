@@ -4,3 +4,5 @@ cd mongod
 tar xfz mongo-r3.0.6.tar.gz
 cd mongo-r3.0.6
 /var/vcap/packages/scons/bin/scons mongod --disable-warnings-as-errors
+
+cp build/linux2/normal/mongo/mongod ${BOSH_INSTALL_TARGET}
