@@ -29,15 +29,7 @@ redirect_output ${output_label}
 
 export HOME=${HOME:-/home/vcap}
 
-# Add all binary packages into $PATH
-
-# for package_bin_dir in $(find /var/vcap/data/packages -type f -executable -printf "%h\n" | uniq); do export PATH=${package_bin_dir}:$PATH; done
-
-declare -A seen_dir
-while read -rd '' f; do
-    seen_dir["${f%/*}"]=1
-done < <(find /var/vcap/data/packages -type f -executable -print0)
-export PATH="${!seen_dir[@]}:$PATH"
+export PATH="/var/vcap/packages/mongod:$PATH"
 
 # Setup log, run and tmp folders
 export RUN_DIR=/var/vcap/sys/run/$JOB_NAME
