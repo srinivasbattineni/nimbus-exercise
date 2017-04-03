@@ -25,6 +25,9 @@ properties:
     description: The directory where the mongod instance stores its data.
     default: /var/vcap/store/mongod
   mongod.replset_name:
-    description:  Specify a replica set name as an argument to this set.
+    description: Specify a replica set name.
   mongod.replset_key:
-    description:  Specify a replica set name as an argument to this set.
+    description: Specify a replica set key.
+  mongod.arbiter:
+    description: Is this node an arbiter node?
+    default: false

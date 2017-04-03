@@ -4,10 +4,6 @@ systemLog:
    quiet: false
    logAppend: true
 
-# TODO:
-# journal.enable: false - only for an arbiter node, on data bearing nodes SHOULD ALWAYS BE TRUE
-# log rotation
-
 storage:
   dbPath: /var/vcap/store/mongod
   directoryPerDB: true
@@ -15,8 +11,13 @@ storage:
   quota:
     enforced: true
     maxFilesPerDB: 16
+  <% if p('mongod.arbiter') %>
   journal:
     enabled: false
+  <% else %>
+  journal:
+    enabled: true
+  <% end %>
 
 security:
   authorization: enabled
