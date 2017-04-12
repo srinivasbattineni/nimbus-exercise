@@ -10,18 +10,17 @@ storage:
   journal:
     enabled: <%= !p('mongod.arbiter') %>
   smallFiles: true
-<% if p('mongod.quota_enabled') %>
+  <% if p('mongod.quota_enabled') %>
   quota:
     enforced: true
     maxFilesPerDB: 16
-<% end %>
+  <% end %>
 
 security:
   authorization: enabled
   keyFile: /var/vcap/jobs/mongod/config/mongod_replica_key
 
 net:
-  bindIp: <%= p("mongod.bindip") %>
   port: <%= p("mongod.port") %>
 
 replication:

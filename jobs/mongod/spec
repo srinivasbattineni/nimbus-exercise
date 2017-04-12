@@ -17,9 +17,6 @@ templates:
   bootstrap/create_admin_user.js.erb: bootstrap/create_admin_user.js
 
 properties:
-  mongod.bindip:
-    description: IP address that MongoDB binds to in order to listen for connections
-    default: 0.0.0.0
   mongod.port:
     description: TCP port on which the MongoDB instance listens for client connections
     default: 27017
