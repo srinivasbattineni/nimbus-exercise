@@ -13,6 +13,8 @@ templates:
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh.erb: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
+  bootstrap/replica_set.js.erb: bootstrap/replica_set.js
+  bootstrap/create_admin_user.js.erb: bootstrap/create_admin_user.js
 
 properties:
   mongod.bindip:
@@ -26,8 +28,36 @@ properties:
     default: /var/vcap/store/mongod
   mongod.replset_name:
     description: Specify a replica set name.
+    default: rs01
   mongod.replset_key:
     description: Specify a replica set key.
+  mongod.replset_nodes:
+    default: []
+    description: |
+      Specify nodes comprising a replica set. Required by the bootstrap templates.
+      Please node that host names MUST BE dns names, not ip addresses (https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)
+
+      Example:
+
+      properties:
+        mongod:
+          replset_nodes:
+          - node: slu-ct-scmsmongo-m-db-001.sas.bskyb.com:27017
+            arbiter: false
+          - node: slu-ct-scmsmongo-m-db-002.sas.bskyb.com:27017
+            arbiter: true
+          - node: hem-ct-scmsmongo-m-db-001.sas.bskyb.com:27017
+            arbiter: false
+
   mongod.arbiter:
     description: Is this node an arbiter node?
     default: false
+  mongod.quota_enabled:
+    description: Should db size quota be enabled?
+    default: true
+  mongod.admin_user:
+    description: Admin user
+    default: admin
+  mongod.admin_password:
+    description: Admin password
+    default: ''

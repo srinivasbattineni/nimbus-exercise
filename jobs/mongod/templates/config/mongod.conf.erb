@@ -7,17 +7,14 @@ systemLog:
 storage:
   dbPath: /var/vcap/store/mongod
   directoryPerDB: true
+  journal:
+    enabled: <%= !p('mongod.arbiter') %>
   smallFiles: true
+<% if p('mongod.quota_enabled') %>
   quota:
     enforced: true
     maxFilesPerDB: 16
-  <% if p('mongod.arbiter') %>
-  journal:
-    enabled: false
-  <% else %>
-  journal:
-    enabled: true
-  <% end %>
+<% end %>
 
 security:
   authorization: enabled

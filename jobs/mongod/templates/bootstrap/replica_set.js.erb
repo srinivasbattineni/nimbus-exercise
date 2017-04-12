@@ -1,0 +1,11 @@
+// Run this script manually from a non-arbiter node to bootstrap replica set
+
+// initiate replica set
+rs.initiate({
+    _id : "<%= p("mongod.replset_name") %>",
+    members: [
+        <% p("mongod.replset_nodes").each_with_index do |entry, idx| %>
+        {_id: <%= idx %>, host: "<%= entry['node'] %>" <% if entry['arbiter'] %>, arbiterOnly: true <% end %>},
+        <% end %>
+    ]
+})

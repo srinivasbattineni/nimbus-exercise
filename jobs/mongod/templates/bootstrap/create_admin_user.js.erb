@@ -1,0 +1,11 @@
+// Run this script manually from a master node after bootstrapping a replica set to create an admin user
+
+// create admin user
+db = db.getSiblingDB('admin')
+db.createUser(
+    {
+        user: "<%= p("mongod.admin_user") %>",
+        pwd: "<%= p("mongod.admin_password") %>",
+        roles: [ { role: "root", db: "admin" } ]
+    }
+)
