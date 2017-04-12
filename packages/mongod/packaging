@@ -3,6 +3,13 @@ set -e
 cd mongod
 tar xfz mongo-r3.0.14.tar.gz
 cd mongo-r3.0.14
-/var/vcap/packages/scons/bin/scons mongod --disable-warnings-as-errors
 
-cp build/linux2/normal/mongo/mongod ${BOSH_INSTALL_TARGET}
+/var/vcap/packages/scons/bin/scons core -j4 --dbg=off --opt=off --disable-warnings-as-errors
+
+strip -sg build/linux2/dbg_off/opt_off/mongo/mongod
+strip -sg build/linux2/dbg_off/opt_off/mongo/mongos
+strip -sg build/linux2/dbg_off/opt_off/mongo/mongo
+
+cp build/linux2/dbg_off/opt_off/mongo/mongod ${BOSH_INSTALL_TARGET}
+cp build/linux2/dbg_off/opt_off/mongo/mongos ${BOSH_INSTALL_TARGET}
+cp build/linux2/dbg_off/opt_off/mongo/mongo ${BOSH_INSTALL_TARGET}
