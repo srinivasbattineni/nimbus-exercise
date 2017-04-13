@@ -1,0 +1,19 @@
+#!/bin/bash
+
+LOG_DIR=/var/vcap/sys/log/mongod
+RUNAS=vcap
+
+mkdir -p $LOG_DIR
+chown -R $RUNAS:$RUNAS  $LOG_DIR
+
+cd /var/vcap/packages/pymongo
+tar xfz setuptools-1.4.2.tar.gz
+tar xfz pymongo-3.0.3.tar.gz
+
+cd setuptools-1.4.2
+/usr/bin/python setup.py install >>$LOG_DIR/setuptools.stdout.log 2>>$LOG_DIR/steuptools.stderr.log
+cd ..
+cd pymongo-3.0.3
+/usr/bin/python setup.py install >>$LOG_DIR/pymongo.stdout.log 2>>$LOG_DIR/pymongo.stderr.log
+
+python /var/vcap/jobs/mongod/bin/step_down_if_primary.py

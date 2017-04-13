@@ -3,11 +3,13 @@ name: mongod
 
 packages:
   - mongod
+  - pymongo
 
 templates:
   bin/monit_debugger: bin/monit_debugger
   bin/mongod_ctl: bin/mongod_ctl
-  bin/post_start.sh.erb: bin/post-start
+  bin/drain: bin/drain
+  bin/step_down_if_primary.py: bin/step_down_if_primary.py
   config/mongod.conf.erb: config/mongod.conf
   config/mongod_replica_key.erb: config/mongod_replica_key
   data/properties.sh.erb: data/properties.sh

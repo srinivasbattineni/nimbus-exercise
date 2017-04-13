@@ -1,0 +1,13 @@
+set -e
+
+cp -r pymongo/* ${BOSH_INSTALL_TARGET}
+
+cd pymongo
+tar xfz pymongo-3.0.3.tar.gz
+tar xfz setuptools-1.4.2.tar.gz
+
+cd setuptools-1.4.2
+/usr/bin/python setup.py install
+cd ..
+cd pymongo-3.0.3
+/usr/bin/python setup.py install

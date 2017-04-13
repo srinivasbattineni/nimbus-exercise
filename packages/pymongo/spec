@@ -1,0 +1,7 @@
+---
+name: pymongo
+
+dependencies: []
+
+files:
+- pymongo/**/*
