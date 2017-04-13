@@ -9,7 +9,8 @@ storage:
   directoryPerDB: true
   journal:
     enabled: <%= !p('mongod.arbiter') %>
-  smallFiles: true
+  mmapv1:
+    smallFiles: true
   <% if p('mongod.quota_enabled') %>
   quota:
     enforced: true

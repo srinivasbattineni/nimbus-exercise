@@ -16,6 +16,18 @@ case $1 in
     ulimit -n 64000
     ulimit -u 64000
 
+    # Disable Transparent Huge Pages (THP)
+    # https://docs.mongodb.com/manual/tutorial/transparent-huge-pages/
+    if test -f /sys/kernel/mm/transparent_hugepage/enabled; then
+        echo never > /sys/kernel/mm/transparent_hugepage/enabled
+    fi
+    if test -f /sys/kernel/mm/transparent_hugepage/defrag; then
+        echo never > /sys/kernel/mm/transparent_hugepage/defrag
+    fi
+
+    # bootstrap files readable only by root
+    chmod 400 /var/vcap/jobs/mongod/bootstrap/*
+
     exec chpst -u vcap:vcap mongod \
         --fork \
         --pidfilepath ${PIDFILE} \
