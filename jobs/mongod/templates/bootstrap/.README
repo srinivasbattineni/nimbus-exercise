@@ -1,10 +1,16 @@
 To bootstrap replica set and create an admin user:
 
 1. Pick a non-arbiter node after all nodes are deployed
-2. Ssh into that node, go to /var/vcap/jobs/mongod/bootstrap
-3. Bootstrap replica set: mongo replica_set.js
+2. Ssh into that node
+3. Bootstrap replica set:
+ 
+    export PATH=$PATH:/var/vcap/packages/mongod/
+    mongo /var/vcap/jobs/mongod/bootstrap/replica_set.js
+
 4. Wait for a while for the replica set to initiate, the node on which bootstrap was done will become primary after few seconds
-5. Create admin user: mongo create_admin_user.js
+5. Create admin user: 
+
+    mongo /var/vcap/jobs/mongod/bootstrap/create_admin_user.js
 
 Currently I cannot think of a way of automating this, hence these two scripts has to be run manually.
 
