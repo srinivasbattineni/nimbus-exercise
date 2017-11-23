@@ -1,8 +1,8 @@
 # abort script on any command that exits with a non zero value
 set -e
 cd mongod
-tar xfz mongo-r3.0.14.tar.gz
-cd mongo-r3.0.14
+tar xfz mongo-r3.2.17.tar.gz
+cd mongo-r3.2.17
 
 /var/vcap/packages/scons/bin/scons core -j4 --dbg=off --opt=off --disable-warnings-as-errors
 
