@@ -2,14 +2,19 @@
 set -e
 cd mongod
 tar xfz mongo-r3.2.17.tar.gz
-cd mongo-r3.2.17
+cd mongodb-linux-x86_64-3.2.17
 
-/var/vcap/packages/scons/bin/scons core -j4 --dbg=off --opt=off --disable-warnings-as-errors
+#/var/vcap/packages/scons/bin/scons core -j4 --dbg=off --opt=off --disable-warnings-as-errors
 
-strip -sg build/linux2/dbg_off/opt_off/mongo/mongod
-strip -sg build/linux2/dbg_off/opt_off/mongo/mongos
-strip -sg build/linux2/dbg_off/opt_off/mongo/mongo
+#strip -sg build/linux2/dbg_off/opt_off/mongo/mongod
+#strip -sg build/linux2/dbg_off/opt_off/mongo/mongos
+#strip -sg build/linux2/dbg_off/opt_off/mongo/mongo
+#
+#cp build/linux2/dbg_off/opt_off/mongo/mongod ${BOSH_INSTALL_TARGET}
+#cp build/linux2/dbg_off/opt_off/mongo/mongos ${BOSH_INSTALL_TARGET}
+#cp build/linux2/dbg_off/opt_off/mongo/mongo ${BOSH_INSTALL_TARGET}
 
-cp build/linux2/dbg_off/opt_off/mongo/mongod ${BOSH_INSTALL_TARGET}
-cp build/linux2/dbg_off/opt_off/mongo/mongos ${BOSH_INSTALL_TARGET}
-cp build/linux2/dbg_off/opt_off/mongo/mongo ${BOSH_INSTALL_TARGET}
+
+cp bin/mongo ${BOSH_INSTALL_TARGET}
+cp bin/mongod ${BOSH_INSTALL_TARGET}
+cp bin/mongos ${BOSH_INSTALL_TARGET}
